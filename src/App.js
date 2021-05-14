@@ -12,23 +12,36 @@ import {
 
 const App = () => {
   //hook for the pomodoro time
-  const [ minutes, setMinutes ] = useState(25)
-  const [ seconds, setSeconds ] = useState(0)
+  const [ minutes, setMinutes ] = useState('')
+  const [ time, setTime ] = useState(0)
   const [ isActive, setIsActive ] = useState(false)
+  const [ pomCount, setPomCount ] = useState(0)
 
-  //handles counting down of time
-  const handleTime = () => {
-    //if both the minutes and seconds are at 0. return.
-    if(minutes === 0 && seconds === 0) {
-      return;
-    //if the seconds are at 0, decrement minutes by one and set seconds to 59
-    }else if(seconds === 0) {
-      setMinutes(minutes -= 1)
-      setSeconds(59)
-    } else {
-      setSeconds(seconds -= 1)
-    }
+  useEffect(() => {
+  })
 
+  const countdown = () => {
+   //we multiply minutes by 60 to get total time in seconds
+    const totalTime = time * 60
+  }
+  /*
+  User inputs amt of minutes
+
+
+  for display 
+  - minutes: time / 60
+  - seconds: time % 60
+  <Timer>{minutes}:{seconds}</Timer>
+
+  logic to countdown 
+  - while time > 0
+    - time -= 1
+  
+
+  */
+
+  const handlePlay = () => {
+    setIsActive(!isActive)
   }
 
   return (
@@ -41,20 +54,20 @@ const App = () => {
           </DisplayContainer>
           
           <PomContainer>
-            <Pom></Pom>
-            <Pom></Pom>
-            <Pom></Pom>
-            <Pom></Pom>
+            <Pom />
+            <Pom />
+            <Pom />
+            <Pom />
           </PomContainer>
 
         <ButtonContainer>
 
-          <Button>
+          <Button onClick={handlePlay}>
             <p>{isActive ? 'Pause' : 'Start'}</p>
           </Button>
-          <Button>
+          {/*<Button>
             <p>Set Time</p>
-          </Button>
+          </Button>*/}
 
         </ButtonContainer>
 
