@@ -13,17 +13,11 @@ import {
 const App = () => {
   //hook for the pomodoro time
   const [ minutes, setMinutes ] = useState('')
-  const [ time, setTime ] = useState(0)
+  const [ time, setTime ] = useState(5 * 60)
+  const [ count, setCount] = useState(0)
   const [ isActive, setIsActive ] = useState(false)
   const [ pomCount, setPomCount ] = useState(0)
 
-  useEffect(() => {
-  })
-
-  const countdown = () => {
-   //we multiply minutes by 60 to get total time in seconds
-    const totalTime = time * 60
-  }
   /*
   User inputs amt of minutes
 
@@ -40,6 +34,13 @@ const App = () => {
 
   */
 
+  useEffect(() => {
+    if(isActive === true){
+      setInterval(setTime(time - 1),1000)
+    }
+    console.log(time)
+  },[time])
+
   const handlePlay = () => {
     setIsActive(!isActive)
   }
@@ -50,7 +51,8 @@ const App = () => {
       <PomWrapper>
 
           <DisplayContainer>
-            <Timer>25:00</Timer>
+            <Timer>{Math.floor(time / 60)}:{time%60 == 0?'00': time%60}
+            </Timer>
           </DisplayContainer>
           
           <PomContainer>
